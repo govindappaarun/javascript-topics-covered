@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  
+  <style>
+    .hide {
+      display: none;
+    }
+  </style>
+  <body>
+  <!--   js assignments   -->
+    
+    <button id="myBtn">Click me!</button>
+    <script>
+        const myBtn = document.querySelector('#myBtn');
+        // debugger;
+        if(myBtn){
+            myBtn.addEventListener('click',()=> {
+                console.log('clicked ' + new Date())
+            });
+        }
+    </script>
+    
+    <button id="myBtn" class="btn btn-primary">Menu</button>
+    
+    <ul id="myList" class="list my-list">
+      <li>India</li>
+      <li>Australia</li>
+      <li>Srilanka</li>
+      <li>Sweeden</li>
+    </ul>
+    
+    <p>Lorem ipsum dolor sit amet consectetur.</p>
+    
+    <script>
+      const myBtn = document.querySelector("#myBtn");
+      const myList = document.querySelector("#myList");
+
+      if (myBtn) {
+        myBtn.addEventListener("mouseenter", () => {
+          // console.log('clicked ' + new Date())
+          // myList.style.display="none";
+          myList.classList.add("hide");
+        });
+
+        myBtn.addEventListener("mouseleave", () => {
+          myList.classList.remove("hide");
+        });
+      }
+
+      // setTimeout()
+
+      function delay2(cb, time) {
+        //    const fn = function(){ console.log('test') };
+        setTimeout(cb, time);
+      }
+
+      function cb() {
+        console.log("test me after delay" + new Date());
+      }
+
+      // delay(cb, 10);
+      // delay(cb, 4000);
+
+      // promise based delay
+      function delay(time) {
+        return new Promise((resolve) => {
+          setTimeout(function () {
+            resolve("resolved data from the promise");
+          }, time);
+        });
+      }
+      
+      delay(2000).then((res) => {
+        console.log(res);
+        cb();
+      });
+      delay(5000).then(cb);
+
+      // XMLHttpReuest
+      // AJAX
+      // readyState
+      // status
+      // onReadyStateChange
+
+      // function fetch(){
+      //     resolve(data)
+      // }
+
+      function getData(url) {
+        return new Promise((resolve, reject) => {
+          fetch(url)
+            .then((res) => res.json())
+            .then(
+              (res) => resolve(res),
+              (err) => reject(err)
+            )
+            .catch((err) => {})
+            .finally(() => {
+              clearTimeout("");
+              clearInterval("");
+            });
+        });
+      }
+
+      getData("https://randomuser.m/api/?results=1").then(
+        (data) => console.log(data),
+        (err) => console.log(err)
+      );
+      
+    </script>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
