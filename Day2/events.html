@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events delegation and object</title>
+</head>
+<body onclick="bodyEleClick()">
+    <div onclick="parentClick()">
+        <button onclick="childClick()">Click me</button>
+    </div>
+    <!-- 
+
+        3 event phases
+
+        1. capturing phase
+        2. bubbling phase
+        3. target phase
+
+        e.stopPropogation()
+        Normally the event goes first down (“capturing”) and then up (“bubbling”). But if event.stopPropagation() is called during the capturing phase, then the event travel stops, no bubbling will occur.
+        e.stopImmediatePropgation()
+        e.preventDefault()
+
+        e.eventPhase;
+
+     -->
+    <script>
+        function bodyEleClick() {
+            console.log('body element click');
+        }
+
+        function parentClick(){
+            console.log('Parent Click first');
+        }
+
+        function childClick(){
+            console.log('Child click later');
+        }
+
+        document.querySelector('button').addEventListener('click', (e)=> {
+            console.log(e);
+            console.log(e.type);
+            console.log(e.target);
+            console.log(e.bubbles);
+        })
+
+    </script>
+</body>
+</html>
